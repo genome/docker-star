@@ -1,7 +1,6 @@
 FROM ubuntu:16.04
 
 # add metadata to image
-MAINTAINER="Zachary Skidmore"
 LABEL description="RNA aligner for Spliced Transcripts Alignment to a Reference (STAR)\
 
                    USAGE: STAR"
