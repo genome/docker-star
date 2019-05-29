@@ -4,7 +4,7 @@ MAINTAINER sridhar <sridhar@wustl.edu>
 LABEL \
     description="Image for STAR aligner"
 
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
     bzip2 \
     cmake \
@@ -14,7 +14,6 @@ RUN apt-get update -y && apt-get install -y \
     libtbb2 \
     libtbb-dev \
     ncurses-dev \
-    nodejs \
     python-dev \
     python-pip \
     tzdata \
@@ -31,23 +30,17 @@ RUN tar -xzf /usr/bin/${star_version}.tar.gz -C /usr/bin/
 RUN cp /usr/bin/STAR-${star_version}/bin/Linux_x86_64/* /usr/local/bin
 
 
-# Clean up
-RUN cd /docker_main / && \
-   rm -rf 2.7.0f.tar.gz && \
-   apt-get autoremove -y && \
-   apt-get autoclean -y  && \
-   apt-get clean
-
-
-
-# needed for MGI data mounts
-RUN apt-get update && apt-get install -y libnss-sss && apt-get clean all
-
 ##lsf time stamp bug
 ## borrow from cmiller
 RUN ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime && \
     echo "America/Chicago" > /etc/timezone && \
     dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN cd /docker_main / && \
+   rm -rf 2.7.0f.tar.gz && \
+   apt-get autoremove -y && \
+   apt-get autoclean -y  && \
+   apt-get clean
 
 # Set default working path
 WORKDIR /docker_main
