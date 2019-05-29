@@ -2,7 +2,7 @@ FROM ubuntu:latest
 MAINTAINER sridhar <sridhar@wustl.edu>
 
 LABEL \
-    description="Image for tools used in RnaSeq"
+    description="Image for STAR aligner"
 
 RUN apt-get update -y && apt-get install -y \
     build-essential \
