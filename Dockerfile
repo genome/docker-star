@@ -1,8 +1,7 @@
-FROM ubuntu:latest
+FROM ubuntu:xenial
 MAINTAINER sridhar <sridhar@wustl.edu>
 
-LABEL \
-    description="Image for STAR aligner"
+LABEL description="Image for STAR aligner"
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
@@ -32,9 +31,10 @@ RUN cp /usr/bin/STAR-${star_version}/bin/Linux_x86_64/* /usr/local/bin
 
 ##lsf time stamp bug
 ## borrow from cmiller
-RUN ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime && \
-    echo "America/Chicago" > /etc/timezone && \
-    dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
+RUN echo "America/Chicago" > /etc/timezone
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN cd /docker_main / && \
    rm -rf 2.7.0f.tar.gz && \
