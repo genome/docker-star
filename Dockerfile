@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER sridhar <sridhar@wustl.edu>
 
-LABEL description="Image for STAR aligner"
+LABEL description="Image for STAR aligner version 2.7.0f"
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
