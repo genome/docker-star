@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER sridhar <sridhar@wustl.edu>
 
-LABEL description="Image for STAR aligner version 2.7.0f"
+LABEL description="Image for STAR aligner version 2.7.5c"
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
@@ -22,7 +22,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
     zlib1g-dev
 
 # Star aligner 
-ENV star_version 2.7.0f
+ENV star_version 2.7.5c
 WORKDIR /docker_main
 ADD https://github.com/alexdobin/STAR/archive/${star_version}.tar.gz /usr/bin/
 RUN tar -xzf /usr/bin/${star_version}.tar.gz -C /usr/bin/
@@ -37,7 +37,7 @@ RUN echo "America/Chicago" > /etc/timezone
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN cd /docker_main / && \
-   rm -rf 2.7.0f.tar.gz && \
+   rm -rf ${star_version}.tar.gz && \
    apt-get autoremove -y && \
    apt-get autoclean -y  && \
    apt-get clean
